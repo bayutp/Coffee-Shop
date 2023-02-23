@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -21,10 +22,7 @@ import com.example.jetcoffee.model.Menu
 import com.example.jetcoffee.model.dummyBestSeller
 import com.example.jetcoffee.model.dummyCategory
 import com.example.jetcoffee.model.dummyMenu
-import com.example.jetcoffee.ui.components.CategoryItem
-import com.example.jetcoffee.ui.components.HomeSection
-import com.example.jetcoffee.ui.components.MenuItem
-import com.example.jetcoffee.ui.components.SearchBar
+import com.example.jetcoffee.ui.components.*
 import com.example.jetcoffee.ui.theme.JetCoffeeTheme
 
 class MainActivity : ComponentActivity() {
@@ -40,16 +38,18 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun JetCoffeeApp() {
-    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-        Banner()
-        HomeSection(title = stringResource(id = R.string.section_category)) {
-            CategoryRow()
-        }
-        HomeSection(title = stringResource(id = R.string.menu_favorite)) {
-            MenuRow(listMenu = dummyMenu)
-        }
-        HomeSection(title = stringResource(id = R.string.section_best_seller_menu)) {
-            MenuRow(listMenu = dummyBestSeller)
+    Scaffold(bottomBar = { BottomNav() }) { innerPadding ->
+        Column(modifier = Modifier.verticalScroll(rememberScrollState()).padding(innerPadding)) {
+            Banner()
+            HomeSection(title = stringResource(id = R.string.section_category)) {
+                CategoryRow()
+            }
+            HomeSection(title = stringResource(id = R.string.menu_favorite)) {
+                MenuRow(listMenu = dummyMenu)
+            }
+            HomeSection(title = stringResource(id = R.string.section_best_seller_menu)) {
+                MenuRow(listMenu = dummyBestSeller)
+            }
         }
     }
 }
@@ -90,22 +90,6 @@ fun MenuRow(listMenu: List<Menu>, modifier: Modifier = Modifier) {
         items(listMenu, key = { it.title }) { menu ->
             MenuItem(menu = menu)
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CategoryRowPreview() {
-    JetCoffeeTheme {
-        CategoryRow()
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MenuRowPreview() {
-    JetCoffeeTheme {
-        MenuRow(listMenu = dummyMenu)
     }
 }
 

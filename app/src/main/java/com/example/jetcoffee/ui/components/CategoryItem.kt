@@ -22,7 +22,7 @@ import com.example.jetcoffee.ui.theme.JetCoffeeTheme
 
 @Composable
 fun CategoryItem(category: Category, modifier: Modifier = Modifier) {
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modifier = Modifier.padding(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
             painter = painterResource(id = category.imgCategory),
             contentDescription = null,
@@ -48,7 +48,7 @@ fun CategoryItemPreview() {
             category = Category(
                 R.drawable.icon_category_cappuccino,
                 R.string.category_cappuccino
-            ), modifier = Modifier.padding(8.dp)
+            )
         )
     }
 }

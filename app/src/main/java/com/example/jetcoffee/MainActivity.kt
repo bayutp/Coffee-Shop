@@ -17,8 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetcoffee.model.*
+import com.example.jetcoffee.model.Menu
+import com.example.jetcoffee.model.dummyBestSeller
+import com.example.jetcoffee.model.dummyCategory
+import com.example.jetcoffee.model.dummyMenu
 import com.example.jetcoffee.ui.components.CategoryItem
+import com.example.jetcoffee.ui.components.HomeSection
 import com.example.jetcoffee.ui.components.MenuItem
 import com.example.jetcoffee.ui.components.SearchBar
 import com.example.jetcoffee.ui.theme.JetCoffeeTheme
@@ -38,12 +42,15 @@ class MainActivity : ComponentActivity() {
 fun JetCoffeeApp() {
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         Banner()
-        TextSection(title = stringResource(id = R.string.section_category))
-        CategoryRow()
-        TextSection(title = stringResource(id = R.string.menu_favorite))
-        MenuRow(listMenu = dummyMenu)
-        TextSection(title = stringResource(id = R.string.section_best_seller_menu))
-        MenuRow(listMenu = dummyBestSeller)
+        HomeSection(title = stringResource(id = R.string.section_category)) {
+            CategoryRow()
+        }
+        HomeSection(title = stringResource(id = R.string.menu_favorite)) {
+            MenuRow(listMenu = dummyMenu)
+        }
+        HomeSection(title = stringResource(id = R.string.section_best_seller_menu)) {
+            MenuRow(listMenu = dummyBestSeller)
+        }
     }
 }
 
